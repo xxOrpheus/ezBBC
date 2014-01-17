@@ -18,10 +18,13 @@ class ezBBC {
 				if(!filter_var($matches[1], FILTER_VALIDATE_URL)) {
 					return ($matches[2]);
 				}
-				return '<a href="' . $matches[1] . '">' . ($matches[2]) . '</a>';
+				return '<a target="_blank" href="' . $matches[1] . '">' . ($matches[2]) . '</a>';
 			},
 			'/\[color="#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})"\](.*?)\[\/color\]/i' => function($matches) {
 				return '<span style="color:#' . $matches[1] . ';">' . $matches[2] . '</span>';
+			},
+			'/\[s\](.*?)\[\/s\]/i' => function($match) {
+				return '<span style="text-decoration: line-through;">' . $match[1] . '</span>';
 			}
 		);
 		if($bbc != null && count($bbc) > 0) {
@@ -46,4 +49,3 @@ class ezBBC {
 		return $text;
 	}
 }
-?>
